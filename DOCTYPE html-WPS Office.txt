@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern School of Sciences</title>
+    <style>
+        /* ---------- GENERAL STYLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --navy: #0A2463;
+            --cream: #F9F7F0;
+            --white: #FFFFFF;
+            --gray: #333333;
+            --light-gray: #EEEEEE;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #051a47;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--navy);
+        }
+
+        /* ---------- HEADER STYLES ---------- */
+        header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1920/1000');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ---------- NAVBAR STYLES ---------- */
+        nav {
+            background-color: var(--navy);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* ---------- COURSES SECTION ---------- */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- COURSE DETAILS SECTION ---------- */
+        .course-details {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ---------- EVENTS SECTION ---------- */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: var(--navy);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- LABORATORY SECTION ---------- */
+        .lab-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .lab-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .lab-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* ---------- PROFESSORS SECTION ---------- */
+        .professors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .professor-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .professor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 1.5rem auto;
+            overflow: hidden;
+        }
+
+        .professor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .professor-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .professor-name {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- FOOTER SECTION ---------- */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .social-links li {
+            margin: 0 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--cream);
+        }
+
+        /* ---------- RESPONSIVE STYLES ---------- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background-color: var(--navy);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .lab-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="#" class="logo">Modern School of Sciences</a>
+            <button class="hamburger">☰</button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#computer-science">Computer Science</a></li>
+                <li><a href="#biology">Molecular Biology</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="header-content">
+            <h1>Welcome to Modern School of Sciences</h1>
+            <p>Dedicated to excellence in education and research. Discover our world-class academic programs designed to shape the leaders of tomorrow.</p>
+            <a href="#courses" class="btn">Explore Courses</a>
+        </div>
+    </header>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Featured Courses</h2>
+            <div class="courses-container">
+                <div class="course-card">
+                    <img src="/api/placeholder/600/400" alt="Computer Science Course">
+                    <div class="course-content">
+                        <h3>Advanced Computer Science</h3>
+                        <p>Dive deep into algorithms, data structures, and modern software development techniques.</p>
+                        <a href="#computer-science" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="/api/placeholder/600/400" alt="Molecular Biology Course">
+                    <div class="course-content">
+                        <h3>Molecular Biology</h3>
+                        <p>Explore the fascinating world of molecular biology and genetic engineering.</p>
+                        <a href="#biology" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Computer Science Course Section -->
+    <section id="computer-science" class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Advanced Computer Science</h2>
+            
+            <!-- Overview -->
+            <div class="course-details">
+                <h3>Course Overview</h3>
+                <p>This advanced computer science course is designed to provide students with an in-depth understanding of modern computing principles and practices. Students will explore complex algorithms, data structures, software engineering methodologies, and cutting-edge technologies like artificial intelligence and machine learning.</p>
+                <p>Throughout this course, you'll engage in both theoretical learning and hands-on projects that simulate real-world scenarios, preparing you for successful careers in software development, system architecture, and technology consulting.</p>
+            </div>
+            
+            <!-- Events -->
+            <h3>Upcoming Events</h3>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="Hackathon Event">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">June 12, 2025</div>
+                        <h4>Annual Hackathon Challenge</h4>
+                        <p>Join our 48-hour coding marathon where students collaborate to build innovative software solutions. Network with industry professionals and showcase your skills to potential employers.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="AI Workshop">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">July 3, 2025</div>
+                        <h4>AI & Machine Learning Workshop</h4>
+                        <p>A hands-on workshop exploring the latest advancements in artificial intelligence and machine learning, led by experts from leading tech companies.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="Tech Conference">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">August 15, 2025</div>
+                        <h4>Tech Industry Conference</h4>
+                        <p>Connect with industry leaders and explore career opportunities in tech. Features keynote speakers, panel discussions, and networking sessions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Laboratory -->
+            <div class="course-details" style="margin-top: 3rem;">
+                <h3>Computer Science Laboratory</h3>
+                <div class="lab-container">
+                    <div class="lab-content">
+                        <h3>State-of-the-Art Computing Facilities</h3>
+                        <p>Our computer science laboratory is equipped with the latest hardware and software technologies to support advanced learning and research. The lab features high-performance workstations, specialized servers for distributed computing experiments, and cutting-edge networking infrastructure.</p>
+                        <p>Students have access to a wide range of development environments, tools, and frameworks necessary for modern software development, web application design, data analysis, and machine learning projects.</p>
+                    </div>
+                    <div class="lab-image">
+                        <img src="/api/placeholder/600/400" alt="Computer Science Laboratory">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professors -->
+            <div style="margin-top: 3rem;">
+                <h3>Meet Our Professors</h3>
+                <div class="professors-container">
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="/api/placeholder/400/400" alt="Professor Smith">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Dr. Jane Smith</h4>
+                            <p>Specializes in Artificial Intelligence and Machine Learning algorithms. Published over 50 research papers and previously worked at Google's AI research division.</p>
+                        </div>
+                    </div>
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="/api/placeholder/400/400" alt="Professor Johnson">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Prof. Robert Johnson</h4>
+                            <p>Expert in cybersecurity and cryptography with over 15 years of experience in the field. Former security consultant for major financial institutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Molecular Biology Course Section -->
+    <section id="biology" class="section">
+        <div class="container">
+            <h2 class="section-title">Molecular Biology</h2>
+            
+            <!-- Overview -->
+            <div class="course-details">
+                <h3>Course Overview</h3>
+                <p>The Molecular Biology course offers a comprehensive exploration of cellular and molecular processes that form the foundation of life. Students will gain deep insights into DNA structure and function, protein synthesis, gene regulation, and genetic engineering techniques.</p>
+                <p>This course combines theoretical learning with extensive laboratory work, preparing students for careers in biotechnology, pharmaceutical research, healthcare, and advanced academic pursuits in the biological sciences.</p>
+            </div>
+            
+            <!-- Events -->
+            <h3>Upcoming Events</h3>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="Research Symposium">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">June 25, 2025</div>
+                        <h4>Undergraduate Research Symposium</h4>
+                        <p>Present your research findings to faculty and peers. Gain valuable feedback and recognition for your work in molecular biology and genetics.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="Field Trip">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">July 18, 2025</div>
+                        <h4>Biotechnology Industry Field Trip</h4>
+                        <p>Visit leading biotechnology companies to observe professional lab environments and learn about real-world applications of molecular biology.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="/api/placeholder/600/400" alt="CRISPR Workshop">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">August 5, 2025</div>
+                        <h4>CRISPR Gene Editing Workshop</h4>
+                        <p>Hands-on workshop exploring the revolutionary CRISPR-Cas9 gene editing technology and its applications in research and medicine.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Laboratory -->
+            <div class="course-details" style="margin-top: 3rem;">
+                <h3>Molecular Biology Laboratory</h3>
+                <div class="lab-container">
+                    <div class="lab-image">
+                        <img src="/api/placeholder/600/400" alt="Molecular Biology Laboratory">
+                    </div>
+                    <div class="lab-content">
+                        <h3>Advanced Research Facilities</h3>
+                        <p>Our molecular biology laboratory is equipped with cutting-edge instruments and technologies for gene sequencing, PCR, cell culture, microscopy, and protein analysis. Students have access to specialized equipment including thermal cyclers, gel electrophoresis systems, fluorescence microscopes, and spectrophotometers.</p>
+                        <p>The lab provides a safe, controlled environment for conducting experiments in DNA extraction, gene expression analysis, protein purification, and genetic engineering, all under the guidance of experienced faculty and lab technicians.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professors -->
+            <div style="margin-top: 3rem;">
+                <h3>Meet Our Professors</h3>
+                <div class="professors-container">
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="/api/placeholder/400/400" alt="Professor Williams">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Dr. Sarah Williams</h4>
+                            <p>Leading researcher in genomics and genetic disorders. Recipient of multiple grants for her groundbreaking work on genetic basis of rare diseases.</p>
+                        </div>
+                    </div>
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="/api/placeholder/400/400" alt="Professor Chen">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Prof. Michael Chen</h4>
+                            <p>Specializes in cellular signaling pathways and cancer biology. Has published extensively in top-tier scientific journals and mentored numerous PhD students.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="course-details">
+                <p style="text-align: center;">Have questions about our courses or want to schedule a visit? Reach out to us!</p>
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <a href="#" class="btn">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>Modern School of Sciences</h3>
+                <p>Dedicated to excellence in education and research since 1995.</p>
+                <ul class="social-links">
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get hamburger button and nav links
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link (for mobile)
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 60, // Adjust for navbar height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

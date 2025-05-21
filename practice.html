@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOUTHERN MINDANAO INSTITUTE OF TECHNOLOGY, INC.</title>
+    <style>
+        /* ---------- GENERAL STYLES ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --navy: #0A2463;
+            --cream: #F9F7F0;
+            --white: #FFFFFF;
+            --gray: #333333;
+            --light-gray: #EEEEEE;
+        }
+
+        body {
+            background-color: var(--cream);
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #051a47;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--navy);
+        }
+
+        /* ---------- HEADER STYLES ---------- */
+        header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://scontent.fcgy1-1.fna.fbcdn.net/v/t1.6435-9/61705648_369394753688557_7888612921289211904_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeHwjFzY82pjxN3r__TRU2GPY4S1ALliBpNjhLUAuWIGkzNKJQjDVTCwhNnyIVaeQqzvXAeM9GMV7ImMUJ0n10nq&_nc_ohc=Q9fWZmQdl3MQ7kNvwE3Nmif&_nc_oc=Adl6FtuS_Gj4Ph0smonbHrryYzhQl0ykBBcsbJI-2tNx3I36cWefx_v52j-5hMgLiX0&_nc_zt=23&_nc_ht=scontent.fcgy1-1.fna&_nc_gid=Yc7xVr28izj4cBC38L4NMg&oh=00_AfJQL3neimePl4NlBpA91AOKjUoUWBqrxbF8p8FSweCW5g&oe=684CD57D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .header-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        /* ---------- NAVBAR STYLES ---------- */
+        nav {
+            background-color: var(--navy);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--cream);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        /* ---------- COURSES SECTION ---------- */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-content h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- COURSE DETAILS SECTION ---------- */
+        .course-details {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ---------- EVENTS SECTION ---------- */
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover .event-image img {
+            transform: scale(1.05);
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-date {
+            color: var(--navy);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- LABORATORY SECTION ---------- */
+        .lab-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .lab-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .lab-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* ---------- PROFESSORS SECTION ---------- */
+        .professors-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .professor-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .professor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 1.5rem auto;
+            overflow: hidden;
+        }
+
+        .professor-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .professor-content {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .professor-name {
+            margin-bottom: 0.5rem;
+        }
+
+        /* ---------- FOOTER SECTION ---------- */
+        footer {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            list-style: none;
+        }
+
+        .social-links li {
+            margin: 0 1rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--cream);
+        }
+
+        /* ---------- RESPONSIVE STYLES ---------- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background-color: var(--navy);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 2rem;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 1.5rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .lab-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="container navbar">
+            <a href="#" class="logo">SOUTHERN MINDANAO INSTITUTE OF TECHNOLOGY, INC.</a>
+            <button class="hamburger">☰</button>
+            <ul class="nav-links">
+                <li><a href="w.html">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#computer-science">MIDWIFE</a></li>
+                <li><a href="#biology">HM</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="header-content">
+            <h1>Welcome to SMIT Website</h1>
+            <p>Explore our selection of engaging courses designed to prepare you for success in the ever-evolving field of  Midwifery, and Hospitality Management.</p>
+            <a href="#courses" class="btn">Explore Courses</a>
+        </div>
+    </header>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Featured Courses</h2>
+            <div class="courses-container">
+                <div class="course-card">
+                    <img src="midwifelogo.jpg" alt="Computer Science Course">
+                    <div class="course-content">
+                        <h3>MIDWIFERY DEPARTMENT</h3>
+                        <p>Be the Heart of Maternal Care – Enroll at SMIT College of Midwifery!
+                    Are you passionate about making a difference in the lives of mothers and newborns? At Southern Mindanao 
+                    Institute of Technology, Inc. – College of Midwifery, we empower the next generation of midwives to lead with 
+                    compassion, competence, and integrity.</p>
+                        <a href="#computer-science" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <img src="hrmlogo.png" alt="Molecular Biology Course">
+                    <div class="course-content">
+                        <h3>HOSPITALITY AND MANAGEMENT</h3>
+                        <p>The bachelor of science in hospitality management BSHM  is a four year degree program that covers the process planning development, human resource management of the restaurant, and resorts operation. The program also intends to teach entrepreneurship skills.</p>
+                        <a href="#biology" class="btn">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Computer Science Course Section -->
+    <section id="computer-science" class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">MIDWIFE</h2>
+            
+            <!-- Overview -->
+            <div class="course-details">
+                <h3>Course Overview</h3>
+                <p>With a curriculum rooted in hands-on experience, expert faculty, and a nurturing learning environment, SMIT College of Midwifery prepares you to be a confident, capable, and caring midwife ready to serve communities and promote safe motherhood.
+                            Empower your future. Embrace the calling. Excel in midwifery.
+                            ENROLL NOW!</p>
+            </div>
+            
+            <!-- Events -->
+            <h3>Upcoming Events</h3>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="missmid.jpg" alt="Hackathon Event">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">OCTOBER 5</div>
+                        <h4>MISS & MIDWIFERY DAY</h4>
+                        <p>Celebrating the heart and hands that bring life into the world! The future midwives of Southern Mindanao Institute of Technology INC. continue to inspire with their dedication, compassion, and unwavering commitment to care. Here's to the journey ahead, filled with moments of life, love, and empowerment. You carry hope in your hands and strength in your heart. Keep believing in the power of care, and continue to change lives.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="pinning.jpg" alt="AI Workshop">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">September 14</div>
+                        <h4>INVESTURE, PINNING & CANDLE LIGHTNING</h4>
+                        <p>𝐷𝑒𝑠𝑖𝑟𝑒 𝑖𝑠 𝑡ℎ𝑒 𝑘𝑒𝑦 𝑡𝑜 𝑚𝑜𝑡𝑖𝑣𝑎𝑡𝑖𝑜𝑛, 𝑏𝑢𝑡 𝑖𝑡’𝑠 𝑡ℎ𝑒 𝑑𝑒𝑡𝑒𝑟𝑚𝑖𝑛𝑎𝑡𝑖𝑜𝑛 𝑎𝑛𝑑 𝑐𝑜𝑚𝑚𝑖𝑡𝑚𝑒𝑛𝑡 𝑡𝑜 𝑎𝑛 𝑢𝑛𝑟𝑒𝑙𝑒𝑛𝑡𝑖𝑛𝑔 𝑝𝑢𝑟𝑠𝑢𝑖𝑡 𝑜𝑓 𝑦𝑜𝑢𝑟 𝑔𝑜𝑎𝑙 𝑎 𝑐𝑜𝑚𝑚𝑖𝑡𝑚𝑒𝑛𝑡 𝑡𝑜 𝑒𝑥𝑐𝑒𝑙𝑙𝑒𝑛𝑐𝑒 𝑡ℎ𝑎𝑡 𝑤𝑖𝑙𝑙 𝑒𝑛𝑎𝑏𝑙𝑒 𝑦𝑜𝑢 𝑡𝑜 𝑎𝑡𝑡𝑎𝑖𝑛 𝑡ℎ𝑒 𝑠𝑢𝑐𝑐𝑒𝑠𝑠 𝑦𝑜𝑢 𝑠𝑒𝑒𝑘. —𝑀𝑎𝑟𝑖𝑜 𝐴𝑛𝑑𝑟𝑒𝑡𝑡𝑖</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="did.jpg" alt="Tech Conference">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">January 31</div>
+                        <h4>DISASTER PREPAREDNESS FOR HEALTHCARE PROVIDERS</h4>
+                        <p>This 5 Days training is designed to equip healthcare professionals with the skills needed to respond to emergencies, from natural disasters to mass casualty incidents. Learn triage techniques, crisis communication, resource management, and emergency planning to ensure you’re ready when disaster strikes. Enhance your ability to provide effective care under pressure and contribute to your facility’s resilience.</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Professors -->
+            <div style="margin-top: 3rem;">
+                <h3>Meet Our Professor</h3>
+                <div class="professors-container">
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="cathy.jpg" alt="Professor Smith">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Catherine M. Souribio, RM</h4>
+                            <p>DEAN OF MIDWIFERY DEPARTMENT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Molecular Biology Course Section -->
+    <section id="biology" class="section">
+        <div class="container">
+            <h2 class="section-title">HOSPITALITY AND MANAGEMENT</h2>
+            
+            <!-- Overview -->
+            <div class="course-details">
+                <h3>Course Overview</h3>
+                <p> This course provides a comprehensive overview of the hospitality industry, exploring its key sectors including lodging, food and beverage, travel and tourism, and event management. Students will gain foundational knowledge in hospitality operations, customer service, leadership, and business practices specific to the industry. Emphasis is placed on developing professional skills, understanding global trends, and applying management principles to real-world hospitality settings. This course prepares students for further study and careers in a dynamic, service-focused field.</p>
+            </div>
+            
+            <!-- Events -->
+            <h3>Upcoming Events</h3>
+            <div class="events-container">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="send.jpg" alt="Research Symposium">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">March18</div>
+                        <h4>𝟙𝕊𝕋 𝕊𝔼ℕ𝔻-𝕆𝔽𝔽 ℙℝ𝕆𝔾ℝ𝔸𝕄 𝔸ℕ𝔻 ℙ𝕀ℕℕ𝕀ℕ𝔾 ℂ𝔼ℝ𝔼𝕄𝕆ℕ𝕐</h4>
+                        <p>"𝙶𝙾 𝙵𝙾𝚁𝚃𝙷 𝙰𝙽𝙳 𝙲𝚁𝙴𝙰𝚃𝙴 𝚄𝙽𝙵𝙾𝚁𝙶𝙴𝚃𝚃𝙰𝙱𝙻𝙴 𝙴𝚇𝙿𝙴𝚁𝙸𝙴𝙽𝙲𝙴"</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="stay.jpg" alt="Field Trip">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">May3</div>
+                        <h4>Stay-and-learn Program</h4>
+                        <p>The Hospitality Management Program of SMIT Inc. successfully concluded its annual stay-and-learn program, which included a comprehensive geographical tour. Students gained valuable practical experience and enhanced their understanding of the industry.</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="mrms.jpg" alt="CRISPR Workshop">
+                    </div>
+                    <div class="event-content">
+                        <div class="event-date">October25</div>
+                        <h4>Mr. and Ms. HM</h4>
+                        <p>The competition is heating up! Who will be the FACE of HM department ahead? The countdown to crowning Mr. & Ms. HM 2024 is on! Get ready for a night of glamour, talent and community spirit!</p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Professors -->
+            <div style="margin-top: 3rem;">
+                <h3>Meet Our Professors</h3>
+                <div class="professors-container">
+                    <div class="professor-card">
+                        <div class="professor-image">
+                            <img src="jerry.jpg" alt="Professor Williams">
+                        </div>
+                        <div class="professor-content">
+                            <h4 class="professor-name">Dr. Jerry Batadlan</h4>
+                            <p>DEAN OF HOSPITALITY AND MANAGEMENT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section" style="background-color: var(--light-gray);">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <div class="course-details">
+                <p style="text-align: center;">Have questions about our courses or want to schedule a visit? Reach out to us!</p>
+                <div style="display: flex; justify-content: center; margin-top: 2rem;">
+                    <a href="#" class="btn">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <h3>SMIT</h3>
+                <p>Dedicated to excellence in education and research since 1985.</p>
+                <ul class="social-links">
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu toggle -->
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get hamburger button and nav links
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Close menu when clicking a link (for mobile)
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 60, // Adjust for navbar height
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

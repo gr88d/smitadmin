@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enrollment Management</title>
+  <style>
+    /* Reset and base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f0f2f5;
+      color: #333;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: #273746;
+      color: #ecf0f1;
+      padding-top: 40px;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .sidebar li {
+      padding: 18px 30px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px;
+      margin: 0 20px 12px 20px;
+      background-color: transparent;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .sidebar li:hover {
+      background-color: #1abc9c;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(26, 188, 156, 0.4);
+    }
+
+    .sidebar li.active {
+      background-color: #16a085;
+      color: #fff;
+      box-shadow: 0 6px 15px rgba(22, 160, 133, 0.6);
+    }
+
+    .enroll-btn {
+      background-color: #2980b9;
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 3px 8px rgba(41, 128, 185, 0.5);
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    .enroll-btn:hover {
+      background-color: #3498db;
+      box-shadow: 0 5px 15px rgba(52, 152, 219, 0.6);
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 40px 60px;
+      overflow-y: auto;
+      background-color: #fff;
+      box-shadow: inset 0 0 12px #ddd;
+      border-radius: 0 20px 20px 0;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      color: #34495e;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      border-bottom: 2px solid #1abc9c;
+      padding-bottom: 4px;
+      width: fit-content;
+    }
+
+    h3 {
+      color: #34495e;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    p, ul {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      padding-left: 20px;
+      list-style-type: disc;
+      margin-bottom: 30px;
+    }
+
+    .form-container {
+      background-color: #fafafa;
+      padding: 35px 45px;
+      border-radius: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      max-width: 850px;
+      margin: 0 auto 40px;
+      border: 1px solid #e1e4e8;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #34495e;
+      font-size: 15px;
+      letter-spacing: 0.03em;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1.8px solid #ced4da;
+      border-radius: 8px;
+      background-color: #fff;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-group input::placeholder,
+    .form-group select {
+      color: #999;
+      font-weight: 400;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #1abc9c;
+      box-shadow: 0 0 6px rgba(26, 188, 156, 0.4);
+      outline: none;
+      background-color: #fff;
+    }
+
+    .row {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .row .form-group {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .submit-btn {
+      padding: 14px 32px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      font-size: 17px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      margin-top: 10px;
+      box-shadow: 0 5px 20px rgba(26, 188, 156, 0.5);
+      user-select: none;
+    }
+
+    .submit-btn:hover {
+      background-color: #16a085;
+      box-shadow: 0 8px 25px rgba(22, 160, 133, 0.7);
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .content-section.active {
+      display: block;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      margin-top: 25px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    thead tr {
+      background-color: #1abc9c;
+      color: white;
+      font-weight: 700;
+    }
+
+    thead th, tbody td {
+      padding: 14px 18px;
+      text-align: center;
+    }
+
+    tbody tr {
+      background-color: #f8f9fa;
+      transition: background-color 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #e1f7f5;
+    }
+
+    .delete-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-btn:hover {
+      background-color: #c0392b;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin-top: 25px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #backBtn {
+      background-color: #1abc9c;
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(26, 188, 156, 0.6);
+      margin: 0 20px 20px 20px;
+      display: block;
+      text-align: center;
+    }
+
+    #backBtn:hover {
+      background-color: #16a085;
+      box-shadow: 0 8px 20px rgba(22, 160, 133, 0.8);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <ul>
+      <button id="backBtn">home</button>
+      <li class="menu-item active" data-target="Course">📘 Course</li>
+      <li class="menu-item" data-target="requirements">📄 Requirements</li>
+      <li class="menu-item" data-target="enrollment">📝 Enrollment</li>
+      <li class="menu-item" data-target="students">🎓 Students</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <!-- Course Section -->
+    <div id="Course" class="content-section active">
+      <h2>CHED Courses</h2>
+      <ul>
+        <li>4 YR. BS Criminology</li>
+        <li>4 YR. BS Industrial Security Management</li>
+        <li>4 YR. BS Business Administration (Marketing, Finance, HRM)</li>
+        <li>4 YR. BSED (English, Math, Filipino, Science)</li>
+        <li>4 YR. Early Childhood Education</li>
+        <li>4 YR. Elementary Education</li>
+        <li>4 YR. Tech-Voc Teacher Education (Auto, Electrical, Electronics, FSM)</li>
+        <li>4 YR. AB Communication</li>
+        <li>4 YR. BS Hospitality Management</li>
+        <li>4 YR. BS Information Technology</li>
+        <li>4 YR. BS Information System</li>
+        <li>2 YR. Associate in Computer Tech</li>
+        <li>2 YR. Midwifery</li>
+      </ul>
+
+      <h2>TESDA Courses</h2>
+      <ul>
+        <li>F&B NC II</li>
+        <li>Commercial Cooking NC II</li>
+        <li>Automotive Servicing NC I & II</li>
+        <li>Computer System Servicing NC II</li>
+        <li>Pharmacy Services NC II</li>
+      </ul>
+
+      <h2>Basic Education</h2>
+      <ul>
+        <li>Grades 1–6</li>
+        <li>Grades 7–10</li>
+      </ul>
+
+      <h2>Senior High School (G11-12)</h2>
+      <ul>
+        <li>HUMSS</li>
+        <li>ABM</li>
+      </ul>
+
+      <h2>TVL Track</h2>
+      <ul>
+        <li>ICT: CSS NC II</li>
+        <li>Home Economics: Cookery, FBS</li>
+        <li>Automotive Servicing NC II</li>
+      </ul>
+    </div>
+
+    <!-- Requirements Section -->
+    <div id="requirements" class="content-section">
+      <h1>Requirements & Fees</h1>
+      <div class="card">
+        <h3>Incoming First Year</h3>
+        <ul>
+          <li>4 pcs 1x1 ID picture</li>
+          <li>Form 138</li>
+          <li>Good Moral</li>
+          <li>Birth Certificate (photocopy)</li>
+          <li>Long brown envelope</li>
+        </ul>
+
+        <h3>Transferees</h3>
+        <ul>
+          <li>Honorable Dismissal</li>
+          <li>Transcript of Records</li>
+          <li>Good Moral</li>
+          <li>4 pcs 1x1 ID picture</li>
+          <li>Birth Certificate (photocopy)</li>
+          <li>Long brown envelope</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Enrollment Section -->
+    <div id="enrollment" class="content-section">
+      <h1>Enrollment Form</h1>
+      <div class="form-container">
+        <div class="row">
+          <div class="form-group">
+            <label>School Year</label>
+            <select>
+              <option>Select School Year</option>
+              <option>2024-2025</option>
+              <option>2025-2026</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Semester</label>
+            <select>
+              <option>Select Semester</option>
+              <option>1st Semester</option>
+              <option>2nd Semester</option>
+              <option>Summer</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Enter first name">
+          </div>
+          <div class="form-group">
+            <label>Middle Name</label>
+            <input type="text" placeholder="Enter middle name">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter last name">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" placeholder="Enter age">
+          </div>
+          <div class="form-group">
+            <label>Gender</label>
+            <select>
+              <option>Select Gender</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Course</label>
+            <select>
+              <option>Choose Course</option>
+              <option>BSIT</option>
+              <option>BSED</option>
+              <option>BEED</option>
+              <option>BSCRIM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Year Level</label>
+            <select>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" placeholder="Enter address">
+        </div>
+
+        <button class="submit-btn">Enroll Now</button>
+      </div>
+    </div>
+
+    <!-- Students Section -->
+    <div id="students" class="content-section">
+      <h1>Student List</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Full Name</th>
+            <th>School Year</th>
+            <th>Semester</th>
+            <th>Course</th>
+            <th>Year Level</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="student-tbody">
+          <!-- Dynamic rows here -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+  // Navigation
+  const menuItems = document.querySelectorAll('.menu-item');
+  const sections = document.querySelectorAll('.content-section');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      menuItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+
+      const target = item.getAttribute('data-target');
+      sections.forEach(s => s.classList.remove('active'));
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Back Button
+  document.getElementById("backBtn").addEventListener("click", function () {
+    window.location.href = "w.html";
+  });
+
+  // Enroll Now Button Functionality
+  const enrollBtn = document.querySelector('.submit-btn');
+  const studentTbody = document.getElementById('student-tbody');
+
+  enrollBtn.addEventListener('click', () => {
+    // Get all form values
+    const inputs = document.querySelectorAll('#enrollment input, #enrollment select');
+    const values = Array.from(inputs).map(input => input.value.trim());
+
+    // Check for empty fields
+    if (values.includes('') || values.includes('Select School Year') || values.includes('Select Semester') || values.includes('Select Gender') || values.includes('Choose Course')) {
+      alert("Please complete all fields before enrolling.");
+      return;
+    }
+
+    // Destructure the values
+    const [schoolYear, semester, firstName, middleName, lastName, age, gender, course, yearLevel, address] = values;
+
+    const fullName = `${firstName} ${middleName} ${lastName}`;
+
+    // Create a new row in the table
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${fullName}</td>
+      <td>${schoolYear}</td>
+      <td>${semester}</td>
+      <td>${course}</td>
+      <td>${yearLevel}</td>
+      <td>${age}</td>
+      <td>${gender}</td>
+      <td>${address}</td>
+      <td><button class="delete-btn">Delete</button></td>
+    `;
+
+    studentTbody.appendChild(tr);
+
+    // Clear form fields
+    inputs.forEach(input => input.value = '');
+
+    // Navigate to Students section
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById('students').classList.add('active');
+
+    menuItems.forEach(i => i.classList.remove('active'));
+    document.querySelector('.menu-item[data-target="students"]').classList.add('active');
+  });
+
+  // Delete Functionality
+  studentTbody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-btn')) {
+      if (confirm("Are you sure you want to delete this student?")) {
+        e.target.closest('tr').remove();
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

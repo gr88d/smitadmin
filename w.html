@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+    .nav-link { font-weight: 700; }
+    #lightbox button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.4);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 60;
+    }
+    #lightbox button:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+    #lightbox .prev { left: 20px; }
+    #lightbox .next { right: 20px; }
+  </style>
+</head>
+<body class="bg-white">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white shadow flex items-center justify-between px-4 py-2">
+    <img alt="Institution logo" class="h-14 w-14" src="logo.png" />
+    <h1 class="font-extrabold text-2xl text-black">Southern Mindanao Institute of Technology Inc.</h1>
+    <nav class="hidden md:flex space-x-6 font-bold text-black text-sm">
+      <a class="nav-link bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition" href="bsit.html">Home</a>
+      <a class="nav-link" href="#">About Us</a>
+      <a class="nav-link" href="#">Programs</a>
+      <button class="nav-link bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition" onclick="toggleGallery()">Gallery</button>
+      <a class="nav-link" href="#">News</a>
+      <a class="nav-link" href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Layout -->
+  <main class="flex h-screen relative">
+    <!-- Sidebar -->
+    <aside class="bg-[#2c3e50] w-40 flex flex-col text-white text-sm">
+      <a class="flex items-center gap-2 px-3 py-3 bg-purple-600 hover:bg-purple-700 rounded text-white font-semibold transition" href="7.html">
+        <i class="fas fa-home"></i> Admission
+      </a>
+      <a class="flex items-center gap-2 px-3 py-3 bg-blue-500 hover:bg-blue-600 rounded text-white font-semibold transition" href="WEB2.html">
+        <i class="fas fa-book-reader"></i> Basic Educ
+      </a>
+      <a class="flex items-center gap-2 px-3 py-3 bg-red-500 hover:bg-red-600 rounded text-white font-semibold transition" href="BSED.html">
+        <i class="fas fa-user-graduate"></i> BSED
+      </a>
+      <a class="flex items-center gap-2 px-3 py-3 bg-yellow-500 hover:bg-yellow-600 rounded text-white font-semibold transition" href="Practice.html">
+        <i class="fas fa-clinic-medical"></i> MIDWIFE&HM
+      </a>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="flex-1 relative">
+      <img alt="School building" class="w-full h-full object-cover" src="x.png" />
+      <div class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 md:p-10 overflow-y-auto">
+        <div class="bg-white bg-opacity-20 backdrop-blur-md rounded-2xl shadow-lg text-white max-w-3xl p-6 md:p-10 space-y-8 text-center border border-white border-opacity-30">
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-2 flex items-center justify-center gap-2">
+              <i class="fas fa-star text-pink-300"></i> Mission
+            </h2>
+            <p>Southern Mindanao Institute of Technology commits to provide the community with competent, ethical, and research-oriented graduates through:</p>
+            <ul class="space-y-2 text-left list-none text-base md:text-lg mx-auto max-w-sm">
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-300"></i> Efficient and effective faculty and staff</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-300"></i> Adequate and appropriate instructional facilities</li>
+              <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-300"></i> Innovative and responsive teaching strategies</li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-2 flex items-center justify-center gap-2">
+              <i class="fas fa-eye text-blue-300"></i> Vision
+            </h2>
+            <p class="text-base md:text-lg leading-relaxed">Southern Mindanao Institute of Technology, Inc is a learner-centered institution committed to quality education.</p>
+          </div>
+          <div>
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4 flex items-center justify-center gap-2">
+              <i class="fas fa-bullseye text-yellow-300"></i> Core Values
+            </h2>
+            <p class="text-base md:text-lg leading-relaxed">SMIT is a time-conscious institution that embraces Service, Modesty, Integrity, and Trust.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Gallery Section -->
+  <section id="gallerySection" class="p-6 bg-gray-100 hidden">
+    <div class="flex gap-4 mb-6">
+      <button onclick="showAlbum('album1')" class="px-4 py-2 bg-blue-500 text-white rounded">BUILDING</button>
+      <button onclick="showAlbum('album2')" class="px-4 py-2 bg-green-500 text-white rounded">FACULTIES</button>
+      <button onclick="showAlbum('album3')" class="px-4 py-2 bg-red-500 text-white rounded">Teacher's Day</button>
+    </div>
+
+    <!-- Album 1: Building -->
+    <div id="album1" class="album grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="text-center">
+        <img src="GYM.jpg" alt="GYM" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">GYM</p>
+      </div>
+      <div class="text-center">
+        <img src="1.jpg" alt="Main Building" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">Main Building</p>
+      </div>
+      <div class="text-center">
+        <img src="2.jpg" alt="Crim Building" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">Crim Building</p>
+      </div>
+      <div class="text-center">
+        <img src="3.jpg" alt="Elementary Building" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">Elementary Building</p>
+      </div>
+      <div class="text-center">
+        <img src="4.jfif" alt="Library" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">Library</p>
+      </div>
+      <div class="text-center">
+        <img src="5.jpg" alt="Hallway" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+        <p class="mt-1 font-medium">Hallway</p>
+      </div>
+    </div>
+
+    <!-- Album 2: Faculties -->
+    <div id="album2" class="album grid grid-cols-2 md:grid-cols-3 gap-4 hidden">
+      <div class="text-center">
+        <img src="8.jpg" alt="Faculty 1" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+      </div>
+      <div class="text-center">
+        <img src="9.jpg" alt="Faculty 2" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+      </div>
+      <div class="text-center">
+        <img src="10.jpg" alt="Faculty 3" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+      </div>
+      <div class="text-center">
+        <img src="11.jpg" alt="" class="w-full h-48 object-cover rounded shadow cursor-pointer" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <!-- Album 3: Teacher's Day -->
+    <div id="album3" class="album grid grid-cols-2 md:grid-cols-3 gap-4 hidden">
+      <script>
+        const teacherDayImgs = Array.from({ length: 14 }, (_, i) => i + 12);
+        teacherDayImgs.forEach(num => {
+          document.write(`
+            <div class="text-center">
+              <img src="${num}.jpg" alt="Teacher's Day ${num}" 
+                   class="w-full h-48 object-cover rounded shadow cursor-pointer" 
+                   onclick="openLightbox(this.src)">
+              <p class="mt-1 font-medium">Teacher's Day ${num}</p>
+            </div>
+          `);
+        });
+      </script>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" onclick="closeLightbox(event)" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 hidden items-center justify-center z-50">
+    <button class="prev" onclick="showPrev(event)">&lt;</button>
+    <img id="lightbox-img" src="" alt="Zoomed image" class="max-w-3xl max-h-[80%] rounded shadow-lg" />
+    <button class="next" onclick="showNext(event)">&gt;</button>
+  </div>
+
+  <script>
+    let imageElements = [];
+    let imageSources = [];
+    let currentIndex = 0;
+
+    function toggleGallery() {
+      const gallery = document.getElementById('gallerySection');
+      gallery.classList.toggle('hidden');
+      if (!gallery.classList.contains('hidden')) {
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const topPos = gallery.offsetTop - headerHeight;
+        window.scrollTo({ top: topPos, behavior: 'smooth' });
+        setTimeout(() => {
+          imageElements = document.querySelectorAll('#gallerySection img');
+          imageSources = Array.from(imageElements).map(img => img.src);
+        }, 100);
+      }
+    }
+
+    function showAlbum(albumId) {
+      document.querySelectorAll('.album').forEach(album => album.classList.add('hidden'));
+      document.getElementById(albumId).classList.remove('hidden');
+    }
+
+    function openLightbox(src) {
+      currentIndex = imageSources.indexOf(src);
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.getElementById('lightbox').classList.add('flex');
+    }
+
+    function closeLightbox(event) {
+      if (event.target.tagName.toLowerCase() !== 'img' && event.target.tagName.toLowerCase() !== 'button') {
+        document.getElementById('lightbox').classList.remove('flex');
+        document.getElementById('lightbox').classList.add('hidden');
+      }
+    }
+
+    function showNext(event) {
+      event.stopPropagation();
+      currentIndex = (currentIndex + 1) % imageSources.length;
+      document.getElementById('lightbox-img').src = imageSources[currentIndex];
+    }
+
+    function showPrev(event) {
+      event.stopPropagation();
+      currentIndex = (currentIndex - 1 + imageSources.length) % imageSources.length;
+      document.getElementById('lightbox-img').src = imageSources[currentIndex];
+    }
+  </script>
+</body>
+</html>
